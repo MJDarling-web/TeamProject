@@ -1,6 +1,6 @@
 # TeamProject
 Team Project for Enterprise Java 
 
-Problem Statement Holding
+Resumes? 
 
-Project Plan Holding
+Problem Statement Holding
