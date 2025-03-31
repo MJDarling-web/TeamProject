@@ -1,8 +1,8 @@
 # Design Discussion 04/02/25
 
 ## Resources
-<details>
-<summary><strong>Location</strong></summary><br>
+
+### Location
 
 |Property|Description|Type/Format|
 |---|---|---|
@@ -16,23 +16,23 @@
 |subjects|The subject categories a location falls into. See subject categories for details|array of strings|
 |images|The image URLs associated with the location.|array of strings|
 
-</details>
 
 
 
 ## Requests
-<details>
-<summary><strong>GET</strong></summary><br>
 
-**GET** http://localhost:8080/services/locations - Finds all locations
 
----
+### GET
 
-**GET** http://localhost:8080/services/locations/{locationId} - Finds location by id
+ http://localhost:8080/services/locations - Finds all locations
 
 ---
 
-**GET** http://localhost:8080/services/locations?city=cityName&state=stateAbrv - Finds location by city & state
+http://localhost:8080/services/locations/{locationId} - Finds location by id
+
+---
+
+http://localhost:8080/services/locations?city=cityName&state=stateAbrv - Finds location by city & state
 
 **Parameters:**
 
@@ -43,7 +43,7 @@
 
 ---
 
-**GET** http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations by subject
+http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations by subject
 
 **Parameters:**
 
@@ -53,42 +53,31 @@
 
 ---
 
-</details>
 
 
-<details>
-<summary><strong>POST</strong></summary><br>
+### POST
 
-**POST** http://localhost:8080/services/locations -  Add a new location<br>
+http://localhost:8080/services/locations -  Add a new location<br>
 
 ---
 
-**POST** http://localhost:8080/services/locations/{locationId}/images - Uploads an image to the Location<br>
-</details>
-
-
-
-<details>
-<summary><strong>PUT</strong></summary><br>
-
-**PUT** http://localhost:8080/services/locations/{locationId} - Updates an existing location
+http://localhost:8080/services/locations/{locationId}/images - Uploads an image to the Location<br>
 
 ---
 
-</details>
-
-<details>
-<summary><strong>DELETE</strong></summary><br>
-
-**DELETE** http://localhost:8080/services/locations/{locationId} - Deletes an existing location
+### PUT 
+http://localhost:8080/services/locations/{locationId} - Updates an existing location
 
 ---
 
-**DELETE** http://localhost:8080/services/locations/{locationId}/images - Deletes an image url from an existing location
+### DELETE
+http://localhost:8080/services/locations/{locationId} - Deletes an existing location
 
 ---
 
-</details>
+http://localhost:8080/services/locations/{locationId}/images - Deletes an image url from an existing location
+
+---
 
 
 ## Entities
