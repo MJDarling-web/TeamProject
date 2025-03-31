@@ -24,28 +24,20 @@
 
 ### GET
 
- http://localhost:8080/services/locations - Finds all locations
-
----
+http://localhost:8080/services/locations - Finds all locations
 
 http://localhost:8080/services/locations/{locationId} - Finds location by id
 
----
-
 http://localhost:8080/services/locations?city=cityName&state=stateAbrv - Finds location by city & state
 
-**Parameters:**
 
 |Parameter|Description|Type/Format|Required|
 |---|---|---|---|
 |city|City the location resides in|string|Yes|
 |state|Abbreviated state the location resides in. For example "WI"|string|Yes|
 
----
-
 http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations by subject
 
-**Parameters:**
 
 |Parameter|Description|Type/Format|Required|
 |---|---|---|---|
@@ -59,8 +51,6 @@ http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations b
 
 http://localhost:8080/services/locations -  Add a new location<br>
 
----
-
 http://localhost:8080/services/locations/{locationId}/images - Uploads an image to the Location<br>
 
 ---
@@ -72,8 +62,6 @@ http://localhost:8080/services/locations/{locationId} - Updates an existing loca
 
 ### DELETE
 http://localhost:8080/services/locations/{locationId} - Deletes an existing location
-
----
 
 http://localhost:8080/services/locations/{locationId}/images - Deletes an image url from an existing location
 
