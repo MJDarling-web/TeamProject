@@ -63,7 +63,7 @@ http://localhost:8080/services/locations/{locationId} - Updates an existing loca
 ### DELETE
 http://localhost:8080/services/locations/{locationId} - Deletes an existing location
 
-http://localhost:8080/services/locations/{locationId}/images - Deletes an image url from an existing location
+http://localhost:8080/services/locations/{locationId}/images{imageId} - Deletes an image url from an existing location
 
 ---
 
