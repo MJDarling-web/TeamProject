@@ -16,6 +16,22 @@
 |subjects|The subject categories a location falls into. See subject categories for details|array of strings|
 |images|The image URLs associated with the location.|array of strings|
 
+### JSON
+```json
+{
+"locationName": "Picnic Point",
+"city": "Madison",
+"state": "WI",
+"coordinates": {
+"latitude": 43.0731,
+"longitude": -89.3845
+},
+"bestTime": "Afternoon",
+"subjects": ["Lake", "Nature"],
+"description": "Vibrant alley with constantly changing graffiti murals.",
+"images": ["url_to_image1"]
+}
+```
 
 
 
