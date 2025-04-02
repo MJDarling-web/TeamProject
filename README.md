@@ -15,11 +15,14 @@ This project aims to address these challenges by creating an API that enables de
 <details>
 <summary><strong>Week 1: Requirement Analysis & Design</strong></summary>
 
-- Finalize API functionality and endpoints (GET, POST, PUT, DELETE)
-- Design the database schema for Location model using Hibernate
-- Set up Maven structure and dependencies (Hibernate, Log4j, JUnit)
-- Configure AWS for DB hosting
+- Finalize API functionality and endpoints (GET, POST, PUT, DELETE) - Done
+- Design the database schema for Location model using Hibernate - Matt
+- Set up Maven structure and dependencies (Hibernate, Log4j, JUnit, gitIgnore, Persistance DataBase, Properties, GenericDao) - Alperen
+- Configure AWS for DB hosting - Matt will ask Paula
 - Assign tasks and roles
+- Create Location and Coordinate entities - Micah
+- Map entities to database via hibernate - Micah
+- Setup API service shells /locations & shell for our URI endpoints - Jamin
 
 **Deliverables**:
 - Codebase setup
