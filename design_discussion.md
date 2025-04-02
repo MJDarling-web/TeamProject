@@ -24,28 +24,23 @@
 
 ### GET
 
-http://localhost:8080/services/locations - Finds all locations
-
 http://localhost:8080/services/locations/{locationId} - Finds location by id
+
+
+http://localhost:8080/services/locations - Finds all locations
 
 http://localhost:8080/services/locations?city=cityName&state=stateAbrv - Finds location by city & state
 
-
-|Parameter|Description|Type/Format|Required|
-|---|---|---|---|
-|city|City the location resides in|string|Yes|
-|state|Abbreviated state the location resides in. For example "WI"|string|Yes|
-
 http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations by subject
 
-
-|Parameter|Description|Type/Format|Required|
+|Parameter|Description|Type/Format| Required |
 |---|---|---|---|
-|subjects|Subjects that are related to the location|string(s) comma separated|Yes|
+|city|City the location resides in|string| No|
+|state|Abbreviated state the location resides in. For example "WI"|string| No|
+|subjects|Subjects that are related to the location|string(s) comma separated| No|
+
 
 ---
-
-
 
 ### POST
 
