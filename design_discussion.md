@@ -4,17 +4,17 @@
 
 ### Location
 
-|Property|Description|Type/Format|
-|---|---|---|
-|id|Unique identifier|number|
-|locationName|Name of the location. For example "Picnic Point"|string|
-|city|City the location resides in|string|
-|state|Abbreviated state the location resides in. For example "WI"|string|
-|coordinates|Includes latitude and longitude location is at|object|
-|bestTime|The best time to photograph here. Choices are "morning", "afternoon", evening"|string|
-|description|The description of the location|string|
-|subjects|The subject categories a location falls into. See subject categories for details|array of strings|
-|images|The image URLs associated with the location.|array of strings|
+|Property| Description                                                                    |Type/Format|
+|---|--------------------------------------------------------------------------------|---|
+|id| Unique identifier                                                              |number|
+|locationName| Name of the location. For example "Picnic Point"                               |string|
+|city| City the location resides in                                                   |string|
+|state| Abbreviated state the location resides in. For example "WI"                    |string|
+|coordinates| Includes latitude and longitude location is at                                 |object|
+|bestTime| The best time to photograph here. Choices are "morning", "afternoon", evening" |string|
+|description| The description of the location                                                |string|
+|subject| The subject category a location falls into. See subject categories for details |string|
+|images| The image URLs associated with the location.                                   |array of strings|
 
 ### JSON
 ```json
@@ -27,7 +27,7 @@
 "longitude": -89.3845
 },
 "bestTime": "Afternoon",
-"subjects": ["Lake", "Nature"],
+"subject": "Nature",
 "description": "Vibrant alley with constantly changing graffiti murals.",
 "images": ["url_to_image1"]
 }
@@ -47,7 +47,7 @@ http://localhost:8080/services/locations - Finds all locations
 
 http://localhost:8080/services/locations?city=cityName&state=stateAbrv - Finds location by city & state
 
-http://localhost:8080/services/locations?subjects=Lake,Nature- Finds locations by subject
+http://localhost:8080/services/locations?subjects=Lake,Nature - Finds locations by subject
 
 |Parameter|Description|Type/Format| Required |
 |---|---|---|---|
@@ -68,6 +68,8 @@ http://localhost:8080/services/locations/{locationId}/images - Uploads an image 
 
 ### PUT 
 http://localhost:8080/services/locations/{locationId} - Updates an existing location
+
+http://localhost:8080/services/locations/{locationId}/images - Updates an image to the Location<br>
 
 ---
 
@@ -90,7 +92,7 @@ http://localhost:8080/services/locations/{locationId}/images/{imageId} - Deletes
 - private Coordinates coordinates
 - private String bestTime;
 - private String description;
-- private List\<String> subjects;
+- private String Subject;
 - private List\<String> images;
 </details>
 
@@ -105,12 +107,25 @@ http://localhost:8080/services/locations/{locationId}/images/{imageId} - Deletes
 * [Option 1 Diagram](db/photo_chasers_db_design.png)
 * [Option 1 SQL](db/createTables.sql)
 
-## Subject Categories?
-|ID|Subject Name|
-|--|------------|
-|1| TBD|
+## Subject Categories
+| ID | Subject Name    |
+|----|-----------------|
+| 1  | Nature          |
+| 2  | Lake            |
+| 3  | Urban           |
+| 4  | Architecture    |
+| 5  | Cityscape       |
+| 6  | People          |
+| 7  | Wild Life       |
+| 8  | Sun Rise        |
+| 9  | Sun Set         |
+| 10 | Street Art |
 
-## Best Time Categories?
-|ID| Best Time Name |
-|--|----------------|
-|1| TBD            |
+## Best Time Categories
+| ID | Best Time Name |
+|----|----------------|
+| 1  | Morning        |
+| 2  | Afternoon      |
+| 3  | Evening        |
+| 4  | Golden Hour    |
+| 5  | Night          |

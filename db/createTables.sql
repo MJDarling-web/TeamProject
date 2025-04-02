@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS images;
 
 CREATE TABLE best_time (
                          id INTEGER AUTO_INCREMENT PRIMARY KEY,
-                         name varchar(50) NOT NULL
+                         name varchar(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE location (
