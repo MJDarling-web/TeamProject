@@ -20,6 +20,11 @@ CREATE TABLE best_time (
                          optimal_time varchar(50) NOT NULL UNIQUE
 );
 
+CREATE TABLE subject (
+                         id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                         subject_name varchar(100) NOT NULL UNIQUE
+);
+
 CREATE TABLE location (
                       id INTEGER AUTO_INCREMENT PRIMARY KEY,
                       location_name VARCHAR(255) NOT NULL,
@@ -29,21 +34,10 @@ CREATE TABLE location (
                       longitude DECIMAL(9,6) NOT NULL,
                       description TEXT NOT NULL,
                       best_time_id INTEGER NOT NULL,
+                      subject_id INTEGER NOT NULL,
+                      FOREIGN KEY (subject_id) REFERENCES subject(id) ON DELETE RESTRICT,
                       FOREIGN KEY (best_time_id) REFERENCES best_time(id) ON DELETE RESTRICT,
                       UNIQUE (location_name, latitude, longitude)
-);
-
-CREATE TABLE subject (
-                         id INTEGER AUTO_INCREMENT PRIMARY KEY,
-                         subject_name varchar(100) NOT NULL UNIQUE
-);
-
-CREATE TABLE location_subject (
-						location_id INT NOT NULL,
-                        subject_id INT NOT NULL,
-                        PRIMARY KEY (location_id, subject_id),
-                        FOREIGN KEY (location_id) REFERENCES location(id) ON DELETE CASCADE,
-                        FOREIGN KEY (subject_id) REFERENCES subject(id) ON DELETE CASCADE
 );
 
 CREATE TABLE images (
@@ -86,4 +80,3 @@ VALUES
     ('Urban'),
     ('Seasonal'),
     ('People');
-    

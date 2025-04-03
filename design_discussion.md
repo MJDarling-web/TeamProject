@@ -104,8 +104,8 @@ http://localhost:8080/services/locations/{locationId}/images/{imageId} - Deletes
 </details>
 
 ## Database
-* [Option 1 Diagram](db/photo_chasers_db_design.png)
-* [Option 1 SQL](db/createTables.sql)
+* [Option 1 Diagram](db/db_design_option2.png)
+* [Option 1 SQL](db/createTablesOp2.sql)
 
 ## Subject Categories
 | ID | Subject Name    |
