@@ -6,7 +6,7 @@ Built with **Java**, **Hibernate**, **Jersey**, **JUnit**, and deployed to **AWS
 
 ## Problem Statement
 Photography enthusiasts often struggle to discover and share ideal photography spots due to scattered information and the absence of a centralized platform.  
-This project aims to address these challenges by creating an API that enables users to find, contribute to, and manage a curated list of photography locations, including detailed information such as descriptions, images, and optimal shooting times.
+This project aims to address these challenges by creating an API that enables developers to find, contribute to, and manage a curated list of photography locations, including detailed information such as descriptions, images, and optimal shooting times.
 
 ---
 
@@ -15,11 +15,14 @@ This project aims to address these challenges by creating an API that enables us
 <details>
 <summary><strong>Week 1: Requirement Analysis & Design</strong></summary>
 
-- Finalize API functionality and endpoints (GET, POST, PUT, DELETE)
-- Design the database schema for Location model using Hibernate
-- Set up Maven structure and dependencies (Hibernate, Log4j, JUnit)
-- Configure AWS for DB hosting
-- Assign tasks and roles
+- [X] Finalize API functionality and endpoints (GET, POST, PUT, DELETE)
+- [ ] Design the database schema for Location model using Hibernate
+- [ ] Set up Maven structure and dependencies (Hibernate, Log4j, JUnit, gitIgnore, Persistence package with classes Database, PropertiesLoader, GenericDao)
+- [ ] Configure AWS for DB hosting - Matt will ask Paula
+- [X] Assign tasks and roles
+- [ ] Create Location and Coordinate entities - Micah
+- [ ] Map entities to database via hibernate - Micah
+- [ ] Setup API endpoint service shells '/services' & '/locations' shells for our URI endpoints
 
 **Deliverables**:
 - Codebase setup
@@ -151,6 +154,17 @@ BBQ master, charcuterie fan
 - Use team vote to resolve disputes
 - Seek mutual understanding
 - Escalate to instructor if needed
+- If team member is unresponsive for 48+ hours, and team has tried to contact at least 3 times, the team will let the instructor know and pick up any assigned work we feel is crucial.
+</details>
+
+<details>
+<summary><strong>Branching Strategy</strong></summary>
+
+- Follow Java best practices
+- Branch by feature
+- Pull requests will be noted in Slack when they are ready and anyone will pick them up
+- Merge Main branch into your own branch before pushing for code review
+
 </details>
 
 ---
