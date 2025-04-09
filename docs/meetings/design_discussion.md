@@ -104,10 +104,10 @@ http://localhost:8080/services/locations/{locationId}/images/{imageId} - Deletes
 </details>
 
 ## Database
-* [Option 1 Diagram](db/db_design_option1.png)
-* [Option 1 SQL](db/createTablesOp1.sql)
-* [Option 2 Diagram](db/db_design_option2.png)
-* [Option 2 SQL](db/createTablesOp2.sql)
+* [Option 1 Diagram](../../db/db_design_option1.png)
+* [Option 1 SQL](../../db/createTablesOp1.sql)
+* [Option 2 Diagram](../../db/db_design_option2.png)
+* [Option 2 SQL](../../db/createTablesOp2.sql)
 
 ## Subject Categories
 | ID | Subject Name    |
