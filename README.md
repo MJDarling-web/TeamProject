@@ -10,6 +10,12 @@ This project aims to address these challenges by creating an API that enables de
 
 ---
 
+## API Documentation
+
+[View Documentation](apiDocumentation.md)
+
+---
+
 ## Project Plan (3-Week Timeline)
 
 <details>
