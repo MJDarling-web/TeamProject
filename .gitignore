@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Remove Properties files from commit
+/src/main/resources
