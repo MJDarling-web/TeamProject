@@ -26,7 +26,7 @@ public class BestTime {
     private String optimalTime;
 
     /** The list of Locations that reference the best time */
-    @OneToMany(mappedBy = "best_time", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bestTime", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Location> locations = new ArrayList<>();
 
 
