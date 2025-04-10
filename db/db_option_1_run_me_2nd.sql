@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.35, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: photo_chasers
+-- Host: 127.0.0.1    Database: photo_chasers_test
 -- ------------------------------------------------------
 -- Server version	8.0.35
 
@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `best_time`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `best_time` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `optimal_time` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `optimal_time` (`optimal_time`)
+                             `id` int NOT NULL AUTO_INCREMENT,
+                             `optimal_time` varchar(50) NOT NULL,
+                             PRIMARY KEY (`id`),
+                             UNIQUE KEY `optimal_time` (`optimal_time`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,13 +48,13 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `images` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `location_id` int NOT NULL,
-  `image_url` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `location_id` (`location_id`,`image_url`),
-  CONSTRAINT `images_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `location_id` int NOT NULL,
+                          `image_url` varchar(500) NOT NULL,
+                          PRIMARY KEY (`id`),
+                          UNIQUE KEY `location_id` (`location_id`,`image_url`),
+                          CONSTRAINT `images_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +63,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (1,1,'https://myimageurl_1.com'),(2,1,'https://myimageurl_2.com'),(3,2,'https://myimageurl_3.com'),(4,2,'https://myimageurl_4.com'),(5,3,'https://myimageurl_5.com'),(6,3,'https://myimageurl_6.com'),(7,4,'https://myimageurl_7.com'),(8,4,'https://myimageurl_8.com'),(10,5,'https://myimageurl_10.com'),(9,5,'https://myimageurl_9.com'),(11,6,'https://myimageurl_11.com'),(12,6,'https://myimageurl_12.com'),(13,7,'https://myimageurl_13.com'),(14,7,'https://myimageurl_14.com'),(15,8,'https://myimageurl_15.com'),(16,8,'https://myimageurl_16.com'),(17,9,'https://myimageurl_17.com'),(18,9,'https://myimageurl_18.com'),(19,10,'https://myimageurl_19.com'),(20,10,'https://myimageurl_20.com');
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,22 +75,22 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `location` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `location_name` varchar(255) NOT NULL,
-  `city` varchar(100) NOT NULL,
-  `state` char(2) NOT NULL,
-  `latitude` decimal(9,6) NOT NULL,
-  `longitude` decimal(9,6) NOT NULL,
-  `description` text NOT NULL,
-  `best_time_id` int NOT NULL,
-  `subject_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `location_name` (`location_name`,`latitude`,`longitude`),
-  KEY `subject_id` (`subject_id`),
-  KEY `best_time_id` (`best_time_id`),
-  CONSTRAINT `location_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `location_ibfk_2` FOREIGN KEY (`best_time_id`) REFERENCES `best_time` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `location_name` varchar(255) NOT NULL,
+                            `city` varchar(100) NOT NULL,
+                            `state` char(2) NOT NULL,
+                            `latitude` decimal(9,6) NOT NULL,
+                            `longitude` decimal(9,6) NOT NULL,
+                            `description` text NOT NULL,
+                            `best_time_id` int NOT NULL,
+                            `subject_id` int NOT NULL,
+                            PRIMARY KEY (`id`),
+                            UNIQUE KEY `location_name` (`location_name`,`latitude`,`longitude`),
+                            KEY `subject_id` (`subject_id`),
+                            KEY `best_time_id` (`best_time_id`),
+                            CONSTRAINT `location_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE RESTRICT,
+                            CONSTRAINT `location_ibfk_2` FOREIGN KEY (`best_time_id`) REFERENCES `best_time` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +99,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'Sunset Cliffs','San Diego','CA',32.735300,-117.255000,'Dramatic ocean views and rugged cliffs.',4,1),(2,'Millennium Park','Chicago','IL',41.882600,-87.622600,'Famous for Cloud Gate and city skyline views.',2,5),(3,'Acadia Overlook','Bar Harbor','ME',44.338600,-68.273300,'Scenic views of the ocean and rocky coastline.',1,14),(4,'Brooklyn Bridge','New York','NY',40.706100,-73.996900,'Iconic architecture spanning the East River.',3,2),(5,'Great Smoky Mountains','Gatlinburg','TN',35.653200,-83.507000,'Lush forest, foggy ridges, and wildlife.',1,3),(6,'Mission District Murals','San Francisco','CA',37.759900,-122.414800,'Colorful and expressive mural art.',2,9),(7,'Steel Mill Ruins','Pittsburgh','PA',40.440600,-79.995900,'Gritty industrial relics with rust tones.',5,11),(8,'Lincoln Memorial','Washington','DC',38.889300,-77.050200,'Historic site with striking architecture.',3,6),(9,'Lake Tahoe Shoreline','South Lake Tahoe','CA',38.939900,-119.977200,'Crystal clear water surrounded by mountains.',4,7),(10,'Central Park','New York','NY',40.785100,-73.968300,'Vast park in the heart of Manhattan.',2,12);
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,10 +111,10 @@ DROP TABLE IF EXISTS `subject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subject` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `subject_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `subject_name` (`subject_name`)
+                           `id` int NOT NULL AUTO_INCREMENT,
+                           `subject_name` varchar(100) NOT NULL,
+                           PRIMARY KEY (`id`),
+                           UNIQUE KEY `subject_name` (`subject_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -135,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-03  8:22:18
+-- Dump completed on 2025-04-10  8:20:20
