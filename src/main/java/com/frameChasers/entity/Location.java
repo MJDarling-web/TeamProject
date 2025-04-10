@@ -2,6 +2,12 @@ package com.frameChasers.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * The type Location.
+ */
 @Entity
 @Table(name = "location", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"location_name", "latitude", "longitude"})
@@ -32,72 +38,179 @@ public class Location {
     private BestTime bestTime;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    // Getters and setters
+    /** List of the Location's images */
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Image> images = new ArrayList<>();
 
+    /**
+     * Instantiates a new Location.
+     */
+    public Location() {
+    }
+
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets location name.
+     *
+     * @return the location name
+     */
     public String getLocationName() {
         return locationName;
     }
 
+    /**
+     * Sets location name.
+     *
+     * @param locationName the location name
+     */
     public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
 
+    /**
+     * Gets city.
+     *
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets city.
+     *
+     * @param city the city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Gets state.
+     *
+     * @return the state
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * Sets state.
+     *
+     * @param state the state
+     */
     public void setState(String state) {
         this.state = state;
     }
 
+    /**
+     * Gets coordinates.
+     *
+     * @return the coordinates
+     */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Sets coordinates.
+     *
+     * @param coordinates the coordinates
+     */
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets best time.
+     *
+     * @return the best time
+     */
     public BestTime getBestTime() {
         return bestTime;
     }
 
+    /**
+     * Sets best time.
+     *
+     * @param bestTime the best time
+     */
     public void setBestTime(BestTime bestTime) {
         this.bestTime = bestTime;
     }
 
+    /**
+     * Gets subject.
+     *
+     * @return the subject
+     */
     public Subject getSubject() {
         return subject;
     }
 
+    /**
+     * Sets subject.
+     *
+     * @param subject the subject
+     */
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    /**
+     * Gets images.
+     *
+     * @return the images
+     */
+    public List<Image> getImages() {
+        return images;
+    }
+
+    /**
+     * Sets images.
+     *
+     * @param images the images
+     */
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
