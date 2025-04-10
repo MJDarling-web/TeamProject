@@ -17,6 +17,10 @@ class LocationDaoTest {
 
     @BeforeEach
     void setUp() {
+        // Reset the test database to a known state before each test
+        Database database = Database.getInstance();
+        database.runSQL("clean_db.sql");
+
         locationDao = new GenericDao<>(Location.class);
     }
 
