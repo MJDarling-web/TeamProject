@@ -1,6 +1,8 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
 .DS_Store*
+
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
@@ -50,12 +52,16 @@ fabric.properties
 
 # Remove db.properties file from commit
 *.properties
+
 # Remove hibernate.cfg.xml file from commit
 *.cfg.xml
+
 # remove the log files
 *.log
+
 # Remove my notes
 *.txt
+
 # Remove .ebextension and .platform files
 .ebextensions/
 .platform/

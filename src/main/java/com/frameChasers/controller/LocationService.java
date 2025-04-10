@@ -55,8 +55,8 @@ public class LocationService {
                     .build();
         }
 
-        location.getImages().add(imageUrl);
-        dao.saveOrUpdate(location);
+//        location.getImages().add(imageUrl);
+//        dao.saveOrUpdate(location);
 
         return Response.ok("{\"message\": \"Image added successfully\"}").build();
     }

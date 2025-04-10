@@ -2,8 +2,6 @@ package com.frameChasers.entity;
 
 import jakarta.persistence.*;
 
-import javax.security.auth.Subject;
-
 @Entity
 @Table(name = "location", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"location_name", "latitude", "longitude"})
@@ -34,7 +32,7 @@ public class Location {
     private BestTime bestTime;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private Subject subject;
 
     // Getters and setters
