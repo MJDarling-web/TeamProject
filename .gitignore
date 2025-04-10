@@ -65,3 +65,5 @@ fabric.properties
 # Remove .ebextension and .platform files
 .ebextensions/
 .platform/
+
+/src/main/resources/
