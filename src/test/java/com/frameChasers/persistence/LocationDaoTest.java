@@ -7,6 +7,7 @@ import com.frameChasers.entity.Subject;
 import com.frameChasers.entity.BestTime;
 import com.frameChasers.entity.Coordinates;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -84,4 +85,28 @@ class LocationDaoTest {
         List<Location> locations = locationDao.getByPropertyEqual("state", "CA");
         assertFalse(locations.isEmpty());
     }
+
+    @Test
+    void testCoordinates() {
+        GenericDao<Subject> subjectDao = new GenericDao<>(Subject.class);
+        Subject subject = subjectDao.getById(1);
+        BestTime bestTime = new GenericDao<>(BestTime.class).getById(1);
+
+        Coordinates coords = new Coordinates(33.123456, -117.654321);
+        Location newLocation = new Location();
+        newLocation.setLocationName("Beach Spot");
+        newLocation.setCity("Oceanside");
+        newLocation.setState("CA");
+        newLocation.setCoordinates(coords);
+        newLocation.setDescription("A relaxing beach");
+        newLocation.setBestTime(bestTime);
+        newLocation.setSubject(subject);
+
+        int id = locationDao.insert(newLocation);
+        Location inserted = locationDao.getById(id);
+
+        assertEquals(new BigDecimal("33.123456"), inserted.getCoordinates().getLatitude());
+        assertEquals(new BigDecimal("-117.654321"), inserted.getCoordinates().getLongitude());
+    }
+
 }
