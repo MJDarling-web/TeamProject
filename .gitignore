@@ -67,3 +67,5 @@ fabric.properties
 .platform/
 
 /src/main/resources/
+
+.idea/

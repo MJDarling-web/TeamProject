@@ -12,6 +12,17 @@ public class Coordinates {
     private BigDecimal latitude;
     private BigDecimal longitude;
 
+    // No-arg constructor
+    public Coordinates() {
+
+    }
+
+    // Constructor used in tests
+    public Coordinates(double latitude, double longitude) {
+        this.latitude = BigDecimal.valueOf(latitude);
+        this.longitude = BigDecimal.valueOf(longitude);
+    }
+
     //getters and setters
 
     public BigDecimal getLatitude() {
