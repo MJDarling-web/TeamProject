@@ -2,10 +2,11 @@ package com.frameChasers.controller;
 
 import com.frameChasers.entity.Location;
 import com.frameChasers.persistence.GenericDao;
+import com.frameChasers.entity.Image;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+import java.util.List;
 
 
 /**
@@ -13,10 +14,7 @@ import javax.ws.rs.core.Response;
  * It uses the GenericDao class for database operations.
  * This class is part of a RESTful web service that allows clients to manage photography locations.
  */
-/**
- * RESTful web service for managing photography locations.
- * Handles adding new locations and uploading images to existing ones.
- */
+
 @Path("/locations")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -45,6 +43,7 @@ public class LocationService {
      */
     @POST
     @Path("/{locationId}/images")
+    @Consumes(MediaType.TEXT_PLAIN)
     public Response addImageToLocation(@PathParam("locationId") int locationId, String imageUrl) {
         GenericDao<Location> dao = new GenericDao<>(Location.class);
         Location location = dao.getById(locationId);
@@ -55,10 +54,35 @@ public class LocationService {
                     .build();
         }
 
-//        location.getImages().add(imageUrl);
-//        dao.saveOrUpdate(location);
+        Image image = new Image();
+        image.setImageUrl(imageUrl);
+        image.setLocation(location); // required for @ManyToOne
+
+        location.getImages().add(image);
+        dao.update(location);
 
         return Response.ok("{\"message\": \"Image added successfully\"}").build();
+    }
+
+    @GET
+    public Response getAllLocations() {
+        GenericDao<Location> dao = new GenericDao<>(Location.class);
+        return Response.ok(dao.getAll()).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response getLocationById(@PathParam("id") int id) {
+        GenericDao<Location> dao = new GenericDao<>(Location.class);
+        Location location = dao.getById(id);
+
+        if (location == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"error\": \"Location not found\"}")
+                    .build();
+        }
+
+        return Response.ok(location).build();
     }
 
     @GET
@@ -67,5 +91,4 @@ public class LocationService {
     public String testEndpoint() {
         return "It works!";
     }
-
 }
