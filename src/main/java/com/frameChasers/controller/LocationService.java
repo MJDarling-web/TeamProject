@@ -2,9 +2,9 @@ package com.frameChasers.controller;
 
 import com.frameChasers.entity.Location;
 import com.frameChasers.persistence.GenericDao;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 
@@ -60,4 +60,12 @@ public class LocationService {
 
         return Response.ok("{\"message\": \"Image added successfully\"}").build();
     }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String testEndpoint() {
+        return "It works!";
+    }
+
 }
