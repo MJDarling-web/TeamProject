@@ -1,7 +1,9 @@
 package com.frameChasers.entity;
 
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 
 /**
@@ -19,6 +21,7 @@ public class Image {
     /** The location the image is tied to */
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
+    @JsonBackReference(value = "location-images")
     private Location location;
 
     /** The url to the image */
