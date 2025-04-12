@@ -1,6 +1,6 @@
 package com.frameChasers.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -38,7 +38,4 @@ public class Coordinates {
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
-
-
 }
-
