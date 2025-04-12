@@ -1,22 +1,12 @@
 package com.frameChasers.controller;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.HashSet;
-import java.util.Set;
+import org.glassfish.jersey.server.ResourceConfig;
 
-/**
- * Root configuration class for Jersey RESTful services.
- * Defines the base URI path as "/services".
- */
 @ApplicationPath("/services")
-public class RestApplication extends Application {
-
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = new HashSet<>();
-        classes.add(LocationService.class);
-        // Add other resource or provider classes as needed
-        return classes;
+public class JerseyConfig extends ResourceConfig {
+    public JerseyConfig() {
+        packages("com.frameChasers.controller"); // This registers LocationService
+        // register(JacksonFeature.class); // <-- Optional, if jersey-media-json-jackson is in your pom
     }
 }
