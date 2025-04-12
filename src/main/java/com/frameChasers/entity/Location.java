@@ -1,9 +1,13 @@
 package com.frameChasers.entity;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 
 /**
  * The type Location.
@@ -35,14 +39,17 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "best_time_id", nullable = false)
+    @JsonBackReference(value = "bestTime-locations")
     private BestTime bestTime;
 
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
+    @JsonBackReference(value = "subject-locations")
     private Subject subject;
 
     /** List of the Location's images */
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "location-images")
     private List<Image> images = new ArrayList<>();
 
     /**
@@ -165,6 +172,7 @@ public class Location {
      *
      * @return the best time
      */
+
     public BestTime getBestTime() {
         return bestTime;
     }
@@ -183,6 +191,7 @@ public class Location {
      *
      * @return the subject
      */
+
     public Subject getSubject() {
         return subject;
     }
@@ -201,6 +210,7 @@ public class Location {
      *
      * @return the images
      */
+
     public List<Image> getImages() {
         return images;
     }
