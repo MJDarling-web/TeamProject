@@ -1,43 +1,35 @@
-# POST /services/locations
+### POST /services/locations
 
-## Description
-Adds a new location
+Adds a new photography location.
 
-## Request body params (JSON)
+* Data Params
 
-| Parameter Name | Description              | Type/Format                           |Required/Optional|
-|----------------|--------------------------|---------------------------------------|---|
-| locationName   | The name of the location | String                                |Required|
-... fill out the rest
+| Parameter Name | Description                                           | Type/Format | Required/Optional |
+|----------------|-------------------------------------------------------|-------------|-------------------|
+| locationName   | Location name, for example "Picnic Point"             | string      | Required          |
+| city           | City where the location is                            | string      | Optional          |
+| state          | State where the location is                           | string      | Optional          |
+| latitude       | Latitude coordinate. For example, 43.0731             | number      | Required          |
+| longitude      | Longitude coordinate. For example, -89.3845           | number      | Required          |
+| bestTime       | Best time of day to shoot (e.g., "Afternoon")         | string      | Optional          |
+| subject        | Photo subject (e.g., "Nature", "Urban")               | string      | Optional          |
+| description    | Description of the location                           | string      | Optional          |
+| images         | Image URL(s), comma-separated if more than one       | string      | Optional          |
 
-### Request body example
+* Error Response:
+    * **Status Code:** 400
+    * **Content:**  
+      `Property 'locationName' is missing.`
 
-```json
-{
-"locationName": "Picnic Point",
-"city": "Madison",
-"state": "WI",
-"coordinates": {
-"latitude": 43.0731,
-"longitude": -89.3845
-},
-"bestTime": "Afternoon",
-"subject": "Nature",
-"description": "Vibrant alley with constantly changing graffiti murals.",
-"images": ["url_to_image1"]
-}
-```
+* Success Response:
+    * **Status Code:** 200
+    * **Content:**
+      ```
+      Location 4 created: (locationName = Picnic Point, city = Madison, state = WI, latitude = 43.0731, longitude = -89.3845, subject = Nature, bestTime = Afternoon)
+      ```
 
-## Error Response:
-* Status code 400
-* Content:
-```
-FILL IN IF NECESSARY
-```
+* Sample curl:
 
-## Success Response:
-* Status code 201
-* Content:
-```
-FILL IN RESPONSE BODY
-```
+    ```
+    curl --request POST --data "locationName=Picnic Point&city=Madison&state=WI&latitude=43.0731&longitude=-89.3845&bestTime=Afternoon&subject=Nature&description=Vibrant alley with murals&images=https://example.com/image1.jpg" http://localhost:8080/urbanPhotography_war/services/locations
+    ```

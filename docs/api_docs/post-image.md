@@ -1,33 +1,34 @@
-# POST /services/locations/{locationId}/images
+### POST /services/locations/{locationId}/images
 
-## Description
-Adds an image to a location
+Adds an image to an existing location.
 
-## Request body params (JSON)
+* Data Params
 
-| Parameter Name | Description           | Type/Format                           |Required/Optional|
-|----------------|-----------------------|---------------------------------------|---|
-| imageUrl       | The url for the image | String                                |Required|
-... fill out the rest if any
+| Parameter Name | Description                    | Type/Format | Required/Optional |
+|----------------|--------------------------------|-------------|-------------------|
+| imageUrl       | The URL of the image           | string      | Required          |
+| caption        | A short caption for the image  | string      | Optional          |
 
-### Request body example
+* Error Response:
+    * **Status Code:** 400
+    * **Content:**  
+      `Property 'imageUrl' is missing.`
 
-```json
-{
-"imageUrl": "url_to_image"
-}
-```
+* Success Response:
+    * **Status Code:** 200
+    * **Content:**
+      ```
+      Image added to location 4: (imageUrl = https://example.com/picnic-point-sunset.jpg, caption = Sunset at Picnic Point)
+      ```
 
-## Error Response:
-* Status code 400
-* Content:
-```
-FILL IN IF NECESSARY
-```
+* Sample curl:
 
-## Success Response:
-* Status code 201
-* Content:
-```
-FILL IN RESPONSE BODY
-```
+    ```
+    curl --request POST \
+      --url http://localhost:8080/urbanPhotography_war/services/locations/4/images \
+      --header "Content-Type: application/json" \
+      --data '{
+        "imageUrl": "https://example.com/picnic-point-sunset.jpg",
+        "caption": "Sunset at Picnic Point"
+      }'
+    ```
