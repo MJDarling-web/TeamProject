@@ -40,20 +40,18 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "best_time_id", nullable = false)
-//    @JsonBackReference(value = "bestTime-locations")
-    @JsonIgnoreProperties("locations")
+    @JsonBackReference(value = "bestTime-locations")
+//    @JsonIgnoreProperties("locations")
     private BestTime bestTime;
 
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
-    // Changed from back reference to ignore in order to show values in json response
-    // @JsonBackReference(value = "subject-locations")
-    @JsonIgnoreProperties("locations")
+     @JsonBackReference(value = "subject-locations")
+//    @JsonIgnoreProperties("locations")
     private Subject subject;
 
     /** List of the Location's images */
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    // Changed from back reference to ignore in order to show values in json response
     // @JsonManagedReference(value = "location-images")
     private List<Image> images = new ArrayList<>();
 

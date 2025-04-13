@@ -185,18 +185,44 @@ public class LocationService {
     }
 
 
-    // Next up - write this method
-    // Endpoint:  http://localhost:8080/urbanPhotography_war/services/locations/{locationId}/images/{imageId}
+    /**
+     * Deletes an image from a location based on image id
+     * @param locationId the location id to be deleted
+     * @param imageId the image id to be deleted
+     * @return the response code and message
+     */
+    @DELETE
+    @Path("/{locationId}/images/{imageId}")
+    public Response deleteLocationById(
+            @PathParam("locationId") int locationId
+            , @PathParam("imageId") int imageId) {
 
+        // Endpoint:  http://localhost:8080/urbanPhotography_war/services/locations/{locationId}/images/{imageId}
 
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+        GenericDao<Image> imageDao = new GenericDao<>(Image.class);
 
+        Location location = locationDao.getById(locationId);
 
+        // If location does not exist, return a 404
+        if (location == null) {
+            return Response.status(404).entity("{\"error\": \"Location not found\"}").build();
+        }
 
+        // Get the image from the location list of images
+        Image image = imageDao.getById(imageId);
 
+        // If image does not exist, or it doesn't exist for the location specified, throw a 404
+        if (image == null || image.getLocation().getId() != locationId) {
+            return Response.status(404).entity("{\"error\": \"Image not found for this location\"}").build();
+        }
 
+        // Delete the image if location and image exist
+        imageDao.delete(image);
 
+        // Return a success response message after deleting image
+        String successResponse = "{\"message\": \"Image " + imageId + " deleted successfully for location " + locationId + "\"}";
+        return Response.status(200).entity(successResponse).build();
 
-
-
-
+    }
 }
