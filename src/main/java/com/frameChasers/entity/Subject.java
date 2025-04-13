@@ -1,6 +1,9 @@
 package com.frameChasers.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
@@ -26,7 +29,8 @@ public class Subject {
     private String subjectName;
 
     /** The list of Locations that reference the best time */
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "subject-locations")
     private List<Location> locations = new ArrayList<>();
 
 
