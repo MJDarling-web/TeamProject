@@ -88,6 +88,8 @@ public class LocationService {
         Map<String, Object> propertyMap = new HashMap<String, Object>();
         List<Location> locations;
 
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations?city=chicago&state=il&subject=cityscape
+
         // Check for query params
         if (city != null) {
             // Add city to the list if included in query param
@@ -142,6 +144,8 @@ public class LocationService {
         GenericDao<Location> dao = new GenericDao<>(Location.class);
         Location location = dao.getById(id);
 
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations/{id}
+
         if (location == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("{\"error\": \"Location not found\"}")
@@ -150,6 +154,49 @@ public class LocationService {
 
         return Response.ok(location).build();
     }
+
+
+    /**
+     * Deletes a location based on location id
+     * @param id the location id to be deleted
+     * @return the response code and message
+     */
+    @DELETE
+    @Path("/{id}")
+    public Response deleteLocationById(@PathParam("id") int id) {
+
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations/{locationId}
+
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+
+        Location location = locationDao.getById(id);
+
+        if (location == null) {
+            return Response.status(404).entity("{\"error\": \"Location not found\"}").build();
+        }
+
+        // Delete the location
+        locationDao.delete(location);
+
+        // Return a success response message after deleting location
+        String successResponse = "{\"message\": \"Location " + id + " deleted successfully\"}";
+        return Response.status(200).entity(successResponse).build();
+
+    }
+
+
+    // Next up - write this method
+    // Endpoint:  http://localhost:8080/urbanPhotography_war/services/locations/{locationId}/images/{imageId}
+
+
+
+
+
+
+
+
+
+
 
 
 }
