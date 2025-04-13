@@ -1,12 +1,17 @@
 package com.frameChasers.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.frameChasers.entity.Location;
+import com.frameChasers.entity.Subject;
 import com.frameChasers.persistence.GenericDao;
 import com.frameChasers.entity.Image;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -64,17 +69,82 @@ public class LocationService {
         return Response.ok("{\"message\": \"Image added successfully\"}").build();
     }
 
+    /**
+     * Gets all locations
+     * @param city optional city parameter
+     * @param state optional state parameter
+     * @param subject optional subject parameter
+     * @return response with list of locations if results positive
+     * @throws JsonProcessingException
+     */
     @GET
-    public Response getAllLocations() {
-        GenericDao<Location> dao = new GenericDao<>(Location.class);
-        return Response.ok(dao.getAll()).build();
+    public Response getAllLocations(
+            @QueryParam("city") String city,
+            @QueryParam("state") String state,
+            @QueryParam("subject") String subject) throws JsonProcessingException {
+
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+        GenericDao<Subject> subjectDao = new GenericDao<>(Subject.class);
+        Map<String, Object> propertyMap = new HashMap<String, Object>();
+        List<Location> locations;
+
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations?city=chicago&state=il&subject=cityscape
+
+        // Check for query params
+        if (city != null) {
+            // Add city to the list if included in query param
+            propertyMap.put("city", city);
+        }
+        if (state != null) {
+            // Add state to the list if included in query param
+            propertyMap.put("state", state);
+        }
+        if (subject != null) {
+            // Get the subject object
+            List<Subject> subjectList = subjectDao.getByPropertyEqual("subjectName", subject);
+
+            if (subjectList.isEmpty()) {
+                return Response.status(404).entity("Subject not found").build();
+            }
+
+            Subject subjectObj = subjectList.get(0);
+
+
+            // Add subject to list if exists and included in query param
+            propertyMap.put("subject", subjectObj);
+        }
+
+        // If any query params are present, then use them to retrieve the filtered list of locations
+        if (!propertyMap.isEmpty()) {
+            locations = locationDao.findByPropertyEqual(propertyMap);
+        } else {
+            // If no query params present, get all locations
+            locations = locationDao.getAll();
+        }
+
+        // If no locations exist
+        if (locations.isEmpty()) {
+            return Response.status(404).entity("{\"message\": \"Location not found\"}").build();
+        }
+
+        // If locations do exists
+        return Response.status(200).entity(locations).build();
+
+
     }
 
+    /**
+     * Get a specific location by its location id
+     * @param id the id of the location
+     * @return the location that matches the id
+     */
     @GET
     @Path("/{id}")
     public Response getLocationById(@PathParam("id") int id) {
         GenericDao<Location> dao = new GenericDao<>(Location.class);
         Location location = dao.getById(id);
+
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations/{id}
 
         if (location == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -85,10 +155,74 @@ public class LocationService {
         return Response.ok(location).build();
     }
 
-    @GET
-    @Path("/test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String testEndpoint() {
-        return "It works!";
+
+    /**
+     * Deletes a location based on location id
+     * @param id the location id to be deleted
+     * @return the response code and message
+     */
+    @DELETE
+    @Path("/{id}")
+    public Response deleteLocationById(@PathParam("id") int id) {
+
+        // Endpoint http://localhost:8080/urbanPhotography_war/services/locations/{locationId}
+
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+
+        Location location = locationDao.getById(id);
+
+        if (location == null) {
+            return Response.status(404).entity("{\"error\": \"Location not found\"}").build();
+        }
+
+        // Delete the location
+        locationDao.delete(location);
+
+        // Return a success response message after deleting location
+        String successResponse = "{\"message\": \"Location " + id + " deleted successfully\"}";
+        return Response.status(200).entity(successResponse).build();
+
+    }
+
+
+    /**
+     * Deletes an image from a location based on image id
+     * @param locationId the location id to be deleted
+     * @param imageId the image id to be deleted
+     * @return the response code and message
+     */
+    @DELETE
+    @Path("/{locationId}/images/{imageId}")
+    public Response deleteLocationById(
+            @PathParam("locationId") int locationId
+            , @PathParam("imageId") int imageId) {
+
+        // Endpoint:  http://localhost:8080/urbanPhotography_war/services/locations/{locationId}/images/{imageId}
+
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+        GenericDao<Image> imageDao = new GenericDao<>(Image.class);
+
+        Location location = locationDao.getById(locationId);
+
+        // If location does not exist, return a 404
+        if (location == null) {
+            return Response.status(404).entity("{\"error\": \"Location not found\"}").build();
+        }
+
+        // Get the image from the location list of images
+        Image image = imageDao.getById(imageId);
+
+        // If image does not exist, or it doesn't exist for the location specified, throw a 404
+        if (image == null || image.getLocation().getId() != locationId) {
+            return Response.status(404).entity("{\"error\": \"Image not found for this location\"}").build();
+        }
+
+        // Delete the image if location and image exist
+        imageDao.delete(image);
+
+        // Return a success response message after deleting image
+        String successResponse = "{\"message\": \"Image " + imageId + " deleted successfully for location " + locationId + "\"}";
+        return Response.status(200).entity(successResponse).build();
+
     }
 }
