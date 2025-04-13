@@ -69,6 +69,14 @@ public class LocationService {
         return Response.ok("{\"message\": \"Image added successfully\"}").build();
     }
 
+    /**
+     * Gets all locations
+     * @param city optional city parameter
+     * @param state optional state parameter
+     * @param subject optional subject parameter
+     * @return response with list of locations if results positive
+     * @throws JsonProcessingException
+     */
     @GET
     public Response getAllLocations(
             @QueryParam("city") String city,
@@ -123,6 +131,11 @@ public class LocationService {
 
     }
 
+    /**
+     * Get a specific location by its location id
+     * @param id the id of the location
+     * @return the location that matches the id
+     */
     @GET
     @Path("/{id}")
     public Response getLocationById(@PathParam("id") int id) {
@@ -138,10 +151,5 @@ public class LocationService {
         return Response.ok(location).build();
     }
 
-    @GET
-    @Path("/test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String testEndpoint() {
-        return "It works!";
-    }
+
 }
