@@ -1,12 +1,17 @@
 package com.frameChasers.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.frameChasers.entity.Location;
+import com.frameChasers.entity.Subject;
 import com.frameChasers.persistence.GenericDao;
 import com.frameChasers.entity.Image;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -65,9 +70,57 @@ public class LocationService {
     }
 
     @GET
-    public Response getAllLocations() {
-        GenericDao<Location> dao = new GenericDao<>(Location.class);
-        return Response.ok(dao.getAll()).build();
+    public Response getAllLocations(
+            @QueryParam("city") String city,
+            @QueryParam("state") String state,
+            @QueryParam("subject") String subject) throws JsonProcessingException {
+
+        GenericDao<Location> locationDao = new GenericDao<>(Location.class);
+        GenericDao<Subject> subjectDao = new GenericDao<>(Subject.class);
+        Map<String, Object> propertyMap = new HashMap<String, Object>();
+        List<Location> locations;
+
+        // Check for query params
+        if (city != null) {
+            // Add city to the list if included in query param
+            propertyMap.put("city", city);
+        }
+        if (state != null) {
+            // Add state to the list if included in query param
+            propertyMap.put("state", state);
+        }
+        if (subject != null) {
+            // Get the subject object
+            List<Subject> subjectList = subjectDao.getByPropertyEqual("subjectName", subject);
+
+            if (subjectList.isEmpty()) {
+                return Response.status(404).entity("Subject not found").build();
+            }
+
+            Subject subjectObj = subjectList.get(0);
+
+
+            // Add subject to list if exists and included in query param
+            propertyMap.put("subject", subjectObj);
+        }
+
+        // If any query params are present, then use them to retrieve the filtered list of locations
+        if (!propertyMap.isEmpty()) {
+            locations = locationDao.findByPropertyEqual(propertyMap);
+        } else {
+            // If no query params present, get all locations
+            locations = locationDao.getAll();
+        }
+
+        // If no locations exist
+        if (locations.isEmpty()) {
+            return Response.status(404).entity("{\"message\": \"Location not found\"}").build();
+        }
+
+        // If locations do exists
+        return Response.status(200).entity(locations).build();
+
+
     }
 
     @GET
