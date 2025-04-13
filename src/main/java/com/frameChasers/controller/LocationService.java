@@ -225,4 +225,68 @@ public class LocationService {
         return Response.status(200).entity(successResponse).build();
 
     }
+
+    /**
+     * updates existing location
+     * @param id of the location
+     * @param updatedLocation of new location
+     * @return response of success or failure
+     */
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateLocation(@PathParam("id") int id, Location updatedLocation) {
+        GenericDao<Location> dao = new GenericDao<>(Location.class);
+        Location existingLocation = dao.getById(id);
+
+        if (existingLocation == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"error\": \"Location not found\"}")
+                    .build();
+        }
+        //update fields
+        existingLocation.setLocationName(updatedLocation.getLocationName());
+        existingLocation.setCity(updatedLocation.getCity());
+        existingLocation.setState(updatedLocation.getState());
+        existingLocation.setCoordinates(updatedLocation.getCoordinates());
+        existingLocation.setDescription(updatedLocation.getDescription());
+        existingLocation.setBestTime(updatedLocation.getBestTime());
+        existingLocation.setSubject(updatedLocation.getSubject());
+
+        dao.update(existingLocation);
+
+        return Response.ok(existingLocation).build();
+    }
+
+    /**
+     * Updates an image's URL for a specific location
+     * @param locationId the location ID the image belongs to
+     * @param imageId the image ID to update
+     * @param updatedImage the new image object with updated URL
+     * @return response with success or error
+     */
+    @PUT
+    @Path("/{locationId}/images/{imageId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateImageForLocation(
+            @PathParam("locationId") int locationId,
+            @PathParam("imageId") int imageId,
+            Image updatedImage) {
+
+        System.out.println("PUT endpoint hit");
+
+        GenericDao<Image> imageDao = new GenericDao<>(Image.class);
+        Image image = imageDao.getById(imageId);
+
+        if (image == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        image.setImageUrl(updatedImage.getImageUrl());
+        imageDao.update(image);
+
+        return Response.ok(image).build();
+    }
 }
