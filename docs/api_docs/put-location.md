@@ -8,7 +8,6 @@ Updates a location by id
 | Parameter Name | Description              | Type/Format                           | Required/Optional |
 |----------------|--------------------------|---------------------------------------|-------------------|
 | locationName   | The name of the location | String                                | Optional          |
-... fill out the rest
 
 ## Request body example:
 ```json
