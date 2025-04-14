@@ -2,10 +2,13 @@ package com.frameChasers.persistence;
 
 import com.frameChasers.entity.Image;
 import com.frameChasers.entity.Location;
+import com.frameChasers.entity.Subject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -76,5 +79,17 @@ class ImageDaoTest {
     void testGetByPropertyEqual() {
         List<Image> images = imageDao.getByPropertyEqual("imageUrl", "https://myimageurl_1.com");
         assertEquals(1, images.size());
+    }
+
+    @Test
+    void findByPropertyEqual() {
+
+        Map<String, Object> propertyMap = new HashMap<>();
+        propertyMap.put("imageUrl", "https://myimageurl_5.com");
+
+        List<Image> images = imageDao.findByPropertyEqual(propertyMap);
+
+        assertEquals(1, images.size());
+
     }
 }

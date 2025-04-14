@@ -1,12 +1,15 @@
 package com.frameChasers.persistence;
 
 import com.frameChasers.entity.BestTime;
+import com.frameChasers.entity.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BestTimeDaoTest {
 
@@ -90,5 +93,17 @@ public class BestTimeDaoTest {
         assertFalse(bestTimes.isEmpty());
         assertEquals(1, bestTimes.size());
         assertEquals("Night", bestTimes.get(0).getOptimalTime());
+    }
+
+    @Test
+    void findByPropertyEqual() {
+
+        Map<String, Object> propertyMap = new HashMap<>();
+        propertyMap.put("optimalTime", "Morning");
+
+        List<BestTime> bestTimes = bestTimeDao.findByPropertyEqual(propertyMap);
+
+        assertEquals(1, bestTimes.size());
+
     }
 }
