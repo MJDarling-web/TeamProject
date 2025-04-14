@@ -9,8 +9,6 @@ Updates an image of a location
 |----------------|----------------------|---------------------------------------|-------------------|
 | imageUrl       | The url for the image | String                                | Required          |
 
-... fill out the rest if any
-
 ## Request body example:
 ```json
 {
@@ -21,25 +19,29 @@ Updates an image of a location
 ## Error Response:
 * Status code 404
 * Content:
+```json
 {
   "error": "Image not found for the given location"
 }
-
+```
 
 ## Error Response:
 * Status code 400
 * Content:
+```json
 {
   "error": "Property 'imageUrl' is missing."
 }
+```
 
 ## Success Response:
 * Status code 200
 * Content:
+```json
 {
   "message": "Image updated successfully"
 }
-
+```
 * Sample curl:
 ```
 curl --request PUT \
