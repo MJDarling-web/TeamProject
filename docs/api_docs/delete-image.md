@@ -4,17 +4,20 @@
 Deletes an image by id
 
 ## Error Response:
-* Status code 400 (UPDATE OR ADD IF NEEDED)
+* Status code 404
 * Content:
 ```
-FILL IN IF NEEDED
-FOR EXAMPLE, IF LOCATION NOT FOUND
+{"error": "Location not found"}
+
+OR
+
+{"error": "Image not found for this location"}
 ```
 
 ## Success Response:
 * Status code 200
 * Content:
 
-```json
-FILL IN RESPONSE BODY
+```
+{"message": "Image ${imageId} deleted successfully for location ${locationId"}
 ```

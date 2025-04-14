@@ -4,17 +4,16 @@
 Deletes a location by id
 
 ## Error Response:
-* Status code 400 (UPDATE OR ADD IF NEEDED)
+* Status code 404
 * Content:
 ```
-FILL IN IF NEEDED
-FOR EXAMPLE, IF LOCATION NOT FOUND
+{"error": "Location not found"}
 ```
 
 ## Success Response:
 * Status code 200
 * Content:
 
-```json
-FILL IN RESPONSE BODY
+```
+{"message": "Location ${locationId deleted succesfully"}
 ```

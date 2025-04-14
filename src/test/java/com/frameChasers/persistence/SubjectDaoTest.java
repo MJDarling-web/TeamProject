@@ -1,10 +1,13 @@
 package com.frameChasers.persistence;
 
+import com.frameChasers.entity.Location;
 import com.frameChasers.entity.Subject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,5 +71,17 @@ class SubjectDaoTest {
     void testGetByPropertyEqual() {
         List<Subject> subjects = subjectDao.getByPropertyEqual("subjectName", "Nature");
         assertEquals(1, subjects.size());
+    }
+
+    @Test
+    void findByPropertyEqual() {
+
+        Map<String, Object> propertyMap = new HashMap<>();
+        propertyMap.put("subjectName", "Abstract");
+
+        List<Subject> subjects = subjectDao.findByPropertyEqual(propertyMap);
+
+        assertEquals(1, subjects.size());
+
     }
 }

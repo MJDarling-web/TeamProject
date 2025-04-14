@@ -8,7 +8,9 @@ import com.frameChasers.entity.BestTime;
 import com.frameChasers.entity.Coordinates;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -107,6 +109,19 @@ class LocationDaoTest {
 
         assertEquals(new BigDecimal("33.123456"), inserted.getCoordinates().getLatitude());
         assertEquals(new BigDecimal("-117.654321"), inserted.getCoordinates().getLongitude());
+    }
+
+    @Test
+    void findByPropertyEqual() {
+
+        Map<String, Object> propertyMap = new HashMap<>();
+        propertyMap.put("state", "CA");
+        propertyMap.put("city", "San Diego");
+
+        List<Location> locations = locationDao.findByPropertyEqual(propertyMap);
+
+        assertEquals(1, locations.size());
+
     }
 
 }
