@@ -19,17 +19,39 @@ Adds a new photography location.
 * Error Response:
     * **Status Code:** 400
     * **Content:**  
-      `Property 'locationName' is missing.`
+      {
+      "error": "Property 'locationName' is missing."
+      }
 
 * Success Response:
-    * **Status Code:** 200
+    * **Status Code:** 201
     * **Content:**
       ```
-      Location 4 created: (locationName = Picnic Point, city = Madison, state = WI, latitude = 43.0731, longitude = -89.3845, subject = Nature, bestTime = Afternoon)
+      {
+      "id": 4
+      }
       ```
 
 * Sample curl:
 
     ```
-    curl --request POST --data "locationName=Picnic Point&city=Madison&state=WI&latitude=43.0731&longitude=-89.3845&bestTime=Afternoon&subject=Nature&description=Vibrant alley with murals&images=https://example.com/image1.jpg" http://localhost:8080/urbanPhotography_war/services/locations
+    curl --request POST \
+  --url http://localhost:8080/urbanPhotography_war/services/locations \
+  --header "Content-Type: application/json" \
+  --data '{
+    "locationName": "Picnic Point",
+    "city": "Madison",
+    "state": "WI",
+    "latitude": 43.0731,
+    "longitude": -89.3845,
+    "bestTime": "Afternoon",
+    "subject": "Nature",
+    "description": "Vibrant alley with murals",
+    "images": [
+      {
+        "imageUrl": "https://example.com/image1.jpg",
+        "caption": "Golden hour"
+      }
+    ]
+  }'
     ```

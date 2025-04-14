@@ -4,9 +4,11 @@ Returns data about a location by ID in JSON.
 
 ## Error Response:
 
-* **Status Code:** 400
+* **Status Code:** 404
 * **Content:**  
-  `Location ID 99 is invalid.`
+  {
+  "error": "Location not found"
+  }
 
 ## Success Response:
 
@@ -16,17 +18,22 @@ Returns data about a location by ID in JSON.
 ```json
 {
   "id": 1,
-  "name": "Capitol Steps",
+  "locationName": "Capitol Steps",
   "description": "Great night shots when the building is lit up.",
   "city": "Madison",
   "state": "WI",
-  "subject": "architecture",
-  "latitude": 43.0747,
-  "longitude": -89.3841,
+  "subject": {
+    "id": 1,
+    "subjectName": "architecture"
+  },
+  "coordinates": {
+    "latitude": 43.0747,
+    "longitude": -89.3841
+  },
   "images": [
     {
       "id": 1,
-      "url": "https://example.com/photo1.jpg",
+      "imageUrl": "https://example.com/photo1.jpg",
       "caption": "Golden hour"
     }
   ]

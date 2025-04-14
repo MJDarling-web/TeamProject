@@ -10,25 +10,26 @@ Adds an image to an existing location.
 | caption        | A short caption for the image  | string      | Optional          |
 
 * Error Response:
-    * **Status Code:** 400
+    * **Status Code:** 404
     * **Content:**  
-      `Property 'imageUrl' is missing.`
+      {
+      "error": "Location not found"
+      }
 
 * Success Response:
     * **Status Code:** 200
     * **Content:**
       ```
-      Image added to location 4: (imageUrl = https://example.com/picnic-point-sunset.jpg, caption = Sunset at Picnic Point)
+      {
+      "message": "Image added successfully"
+      }
       ```
 
 * Sample curl:
 
     ```
     curl --request POST \
-      --url http://localhost:8080/urbanPhotography_war/services/locations/4/images \
-      --header "Content-Type: application/json" \
-      --data '{
-        "imageUrl": "https://example.com/picnic-point-sunset.jpg",
-        "caption": "Sunset at Picnic Point"
-      }'
+  --url http://localhost:8080/urbanPhotography_war/services/locations/4/images \
+  --header "Content-Type: text/plain" \
+  --data 'https://example.com/picnic-point-sunset.jpg'
     ```
