@@ -19,7 +19,7 @@ This project aims to address these challenges by creating an API that enables de
 ## Presentation
 |Part|Video| Author        |
 |--|--|---------------|
-|1|| Micah Darling |
+|1|https://youtu.be/UOU9_u_9etg| Micah Darling |
 |2|https://youtu.be/LryjWLK3B5c| Matt Brophy   |
 |3|https://youtu.be/DAUglJrVqHU| Jamin Zimmerman|
 

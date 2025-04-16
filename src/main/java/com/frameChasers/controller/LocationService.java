@@ -275,8 +275,6 @@ public class LocationService {
             @PathParam("imageId") int imageId,
             Image updatedImage) {
 
-        System.out.println("PUT endpoint hit");
-
         GenericDao<Image> imageDao = new GenericDao<>(Image.class);
         Image image = imageDao.getById(imageId);
 
