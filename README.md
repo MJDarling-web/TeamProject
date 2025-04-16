@@ -21,7 +21,7 @@ This project aims to address these challenges by creating an API that enables de
 |--|--|---------------|
 |1|| Micah Darling |
 |2|https://youtu.be/LryjWLK3B5c| Matt Brophy   |
-|3|| Jamin Zimmerman|
+|3|https://youtu.be/DAUglJrVqHU| Jamin Zimmerman|
 
 ## Project Plan (3-Week Timeline)
 

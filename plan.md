@@ -38,8 +38,27 @@
 - [x] Merged last week's work into main branch
 - [x] Assigned next tasks due by 4/14
 - #### Goals by Monday 4/14:
-    - [ ] Clean up any unused branches
-    - [ ] Implement assigned API methods (GET/PUT/POST/DELETE)
-    - [ ] Write unit tests for each method
-    - [ ] Update API documentation
-    - [ ] Decide how presentation will be recorded  
+    - [X] Implement assigned API methods (GET/PUT/POST/DELETE)
+    - [X] Write unit tests for each method
+    - [X] Update API documentation
+    - [X] Decide how presentation will be recorded  
+  
+- ## Week 12:
+
+4/14
+- [x] Final team meeting before presentation
+- #### Presentation Plan:
+  - [x] Decided to split the presentation into 3 recorded videos
+  - [x] Assigned presentation parts:
+    - Micah – Part 1: Walkthrough of the README
+    - Matt – Part 2: Walkthrough of the API documentation
+    - Jamin – Part 3: Unit tests, project setup, and endpoint demos
+  - [x] Outlined individual responsibilities:
+    - Jamin: Demonstrate 2 POST methods and GET by ID in Postman
+    - Matt: Demonstrate GET all with params and 2 DELETE methods
+    - Micah: Demonstrate 2 PUT methods
+  - [x] Each member will:
+    - Walk through their own API methods in Postman
+    - Discuss one challenge and a few key learning points
+  - [x] Plan to upload final YouTube videos and link them in the README
+
